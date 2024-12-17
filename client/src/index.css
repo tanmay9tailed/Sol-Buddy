@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* For Chrome, Safari, Edge (Webkit-based browsers) */
+html::-webkit-scrollbar {
+    width: 8px; /* Thin scrollbar */
+  }
+  
+  html::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track background */
+  }
+  
+  html::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #34d399, #10b981); /* Gradient green scrollbar */
+    border-radius: 10px; /* Smooth edges */
+  }
+  
+  html::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #22c55e, #059669); /* Darker green on hover */
+  }
+  
+  /* For Firefox */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #34d399 transparent; /* Fallback for Firefox browsers */
+  }
+  
