@@ -20,7 +20,7 @@ const Login = () => {
     };
     
     axios
-      .post("http://localhost:3000/api/v1/auth/sign-in", loginData)
+      .post("https://sol-buddy.onrender.com/api/v1/auth/sign-in", loginData)
       .then((response) => {
         const publicKey = response.data.publicKey;
         localStorage.setItem("signedIn", publicKey);
@@ -75,7 +75,7 @@ const Signup = () => {
     };
 
     axios
-      .post("http://localhost:3000/api/v1/auth/sign-up", signupData)
+      .post("https://sol-buddy.onrender.com/api/v1/auth/sign-up", signupData)
       .then((response) => {
         const publicKey = response.data.publicKey;
         localStorage.setItem("signedIn", publicKey);

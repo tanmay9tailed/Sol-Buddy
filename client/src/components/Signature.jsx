@@ -11,7 +11,7 @@ const Signature = () => {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/v1/transactions/getTransaction/${signature}`)
+        const response = await axios.get(`https://sol-buddy.onrender.com/api/v1/transactions/getTransaction/${signature}`)
         setTransaction(response.data.data)
         setLoading(false)
       } catch (err) {

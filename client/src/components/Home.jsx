@@ -60,7 +60,7 @@ const Home = () => {
   const checkBalance = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/v1/transactions/balance/${publicKey}`);
+      const response = await axios.get(`https://sol-buddy.onrender.com/api/v1/transactions/balance/${publicKey}`);
       setShowBalance(response.data.balance);
       setError("");
     } catch (err) {
@@ -75,7 +75,7 @@ const Home = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(`http://localhost:3000/api/v1/transactions/send-sol/${publicKey}`, {
+      const response = await axios.post(`https://sol-buddy.onrender.com/api/v1/transactions/send-sol/${publicKey}`, {
         toPubKey: receiverAddress,
         amount: parseFloat(amount),
       });
@@ -97,7 +97,7 @@ const Home = () => {
   const handleShowPrivateKey = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/v1/wallets/privatekey/${publicKey}`);
+      const response = await axios.get(`https://sol-buddy.onrender.com/api/v1/wallets/privatekey/${publicKey}`);
       setPrivateKey(response.data.privateKey);
       setError("");
     } catch (err) {
@@ -111,8 +111,8 @@ const Home = () => {
   const handleShowTransactions = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/v1/transactions/getSignatures/${publicKey}`);
-      console.log(response)
+      const response = await axios.get(`https://sol-buddy.onrender.com/api/v1/transactions/getSignatures/${publicKey}`);
+      console.log(response);
       setTransactions(response.data.data);
       setError("");
     } catch (err) {
@@ -127,7 +127,7 @@ const Home = () => {
     if (window.confirm("Are you sure you want to create a new wallet? Your current wallet will be deleted.")) {
       try {
         setLoading(true);
-        const response = await axios.post("http://localhost:3000/api/v1/wallets/create",{publicKey});
+        const response = await axios.post("https://sol-buddy.onrender.com/api/v1/wallets/create", { publicKey });
         localStorage.setItem("signedIn", response.data.publicKey);
         setPublicKey(response.data.publicKey);
         setError("");
@@ -145,14 +145,14 @@ const Home = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/v1/bot/tip", {
+      const response = await axios.post("https://sol-buddy.onrender.com/api/v1/bot/tip", {
         amount: parseFloat(tipAmount),
         key: publicKey,
       });
       alert("Thank you for your tip!");
-      console.log(response)
-      setSignature(response.data.signature)
-      console.log(signature)
+      console.log(response);
+      setSignature(response.data.signature);
+      console.log(signature);
       setTipAmount("");
       setError("");
     } catch (err) {
