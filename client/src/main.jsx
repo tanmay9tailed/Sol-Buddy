@@ -9,6 +9,9 @@ import Home from "./components/Home.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Signature from "./components/Signature.jsx";
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 const AuthRoute = () => {
   const { isLoggedIn } = useAuth();
