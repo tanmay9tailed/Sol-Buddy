@@ -11,9 +11,11 @@ const Login = () => {
   const emailOrUsernameRef = useRef();
   const passwordRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const loginData = {
       usernameOrEmail: emailOrUsernameRef.current.value,
       password: passwordRef.current.value,
@@ -29,6 +31,9 @@ const Login = () => {
       })
       .catch((err) => {
         console.error("Login failed:", err.response?.data || err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -49,7 +54,7 @@ const Login = () => {
           showPassword={showPassword}
           toggleShowPassword={() => setShowPassword(!showPassword)}
         />
-        <SubmitButton label="Login" />
+        <SubmitButton label="Login" isLoading={isLoading} />
       </form>
       <OptionalLink href="#" text="Forgot your password?" />
       <AccountAction text="Don't have an account?" actionText="Sign up" onClick={() => navigate("/signup")} />
@@ -65,9 +70,11 @@ const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignup = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const signupData = {
       username: usernameRef.current.value,
       email: emailRef.current.value,
@@ -84,6 +91,9 @@ const Signup = () => {
       })
       .catch((err) => {
         console.error("Signup failed:", err.response?.data || err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -105,7 +115,7 @@ const Signup = () => {
           showPassword={showPassword}
           toggleShowPassword={() => setShowPassword(!showPassword)}
         />
-        <SubmitButton label="Sign Up" />
+        <SubmitButton label="Sign Up" isLoading={isLoading} />
       </form>
       <OptionalLink href="#" text="Need help?" />
       <AccountAction text="Already have an account?" actionText="Login" onClick={() => navigate("/login")} />
@@ -160,13 +170,21 @@ const PasswordField = ({ label, id, showPassword, toggleShowPassword, inputRef }
   </div>
 );
 
-const SubmitButton = ({ label }) => (
+const SubmitButton = ({ label, isLoading }) => (
   <div>
     <button
       type="submit"
-      className="w-full py-2 px-4 bg-emerald-400 dark:bg-lime-500 text-white dark:text-emerald-900 font-medium rounded-md hover:bg-emerald-500 dark:hover:bg-lime-400 transition-all"
+      disabled={isLoading}
+      className="w-full py-2 px-4 bg-emerald-400 dark:bg-lime-500 text-white dark:text-emerald-900 font-medium rounded-md hover:bg-emerald-500 dark:hover:bg-lime-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {label}
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <div className="w-5 h-5 border-t-2 border-white dark:border-emerald-900 border-solid rounded-full animate-spin mr-2"></div>
+          Processing...
+        </div>
+      ) : (
+        label
+      )}
     </button>
   </div>
 );
