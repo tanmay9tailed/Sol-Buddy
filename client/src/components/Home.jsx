@@ -15,6 +15,7 @@ const Home = () => {
   const [tipAmount, setTipAmount] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [signature, setSignature] = useState("");
+  const [tipSignature, setTipSignature] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -150,9 +151,7 @@ const Home = () => {
         key: publicKey,
       });
       alert("Thank you for your tip!");
-      console.log(response);
-      setSignature(response.data.signature);
-      console.log(signature);
+      setTipSignature(response.data.signature);
       setTipAmount("");
       setError("");
     } catch (err) {
@@ -345,7 +344,8 @@ const Home = () => {
                     {signature === "" ? (
                       ""
                     ) : (
-                      <div className="mt-4 p-4 bg-white/30 dark:bg-black/20 rounded-lg backdrop-blur-sm">
+                      <div className="mt-4 p-3 bg-white/50 dark:bg-black/30 rounded-md">
+                        <p className="text-sm font-medium mb-1">Your Signature:</p>
                         <a
                           href={`/signature/${signature}`}
                           target="_blank"
@@ -436,16 +436,16 @@ const Home = () => {
                     >
                       Send Tip
                     </button>
-                    {signature && (
+                    {tipSignature && (
                       <div className="mt-4 p-3 bg-white/50 dark:bg-black/30 rounded-md">
                         <p className="text-sm font-medium mb-1">Transaction Signature:</p>
                         <a
-                          href={`/signature/${signature}`}
+                          href={`/signature/${tipSignature}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 underline cursor-pointer break-all"
                         >
-                          {signature}
+                          {tipSignature}
                         </a>
                       </div>
                     )}
