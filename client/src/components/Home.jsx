@@ -23,6 +23,7 @@ const Home = () => {
   useEffect(() => {
     const signedInKey = localStorage.getItem("signedIn");
     setPublicKey(signedInKey || "No Public Key Found");
+    alert("currently its running on devnet");
   }, []);
 
   const handleCopy = () => {
